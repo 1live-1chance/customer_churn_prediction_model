@@ -184,7 +184,6 @@ class ModelTrainer(object):
         for i, feature in enumerate(categorical_features):
             cross_tab = pd.crosstab(data[feature], data['Churn'], normalize='index') * 100
             
-            # Столбчатая диаграмма
             bars = cross_tab.plot(kind='bar', ax=axes[i], 
                                 color=['lightblue', 'lightcoral'],
                                 alpha=0.8)
@@ -285,18 +284,7 @@ class ModelTrainer(object):
         import os
         os.makedirs('analysis_results', exist_ok=True)
         
-        print("🔍 Начинаем анализ датасета...")
-        
-        print("1. Анализ распределения Churn...")
         self.plot_target_distribution('analysis_results/churn_distribution.png')
-        
-        print("2. Анализ числовых признаков...")
         self.plot_numerical_features('analysis_results/numerical_features.png')
-        
-        print("3. Анализ категориальных признаков...")
         self.plot_categorical_features('analysis_results/categorical_features.png')
-        
-        print("4. Анализ корреляций...")
         self.plot_correlation_matrix('analysis_results/correlation_matrix.png')
-        
-        print("✅ Анализ завершен! Все графики сохранены в папке 'analysis_results'")
